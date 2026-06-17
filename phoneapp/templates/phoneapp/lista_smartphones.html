@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo de Smartphones</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'phoneapp/style.css' %}?v=1.1">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Catálogo de Smartphones</h1>
+
+        <a href="{% url 'crear_smartphone' %}" class="btn-nuevo">+ Registrar Nuevo Smartphone</a>
+
+        {% regroup smartphones by manufacturer as lista_agrupada %}
+
+        {% for grupo in lista_agrupada %}
+            <div class="card-fabricante">
+                <h2 class="titulo-fabricante">{{ grupo.grouper.name }}</h2>
+                <p><small>Origen: {{ grupo.grouper.origin }}</small></p>
+
+                <ul>
+                    {% for celular in grupo.list %}
+                        <li>
+                            <strong>{{ celular.name }}</strong>
+                            <span class="specs">RAM: {{ celular.ram }} GB | Almacenamiento: {{ celular.memory_capacity }} GB |
+                                 {% if celular.screen_size %}{{ celular.screen_size }} pulgadas {% endif %}
+                            </span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% empty %}
+            <p style="text-align: center; color: #666;">No hay smartphones registrados en el sistema todavía.</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

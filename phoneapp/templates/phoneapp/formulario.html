@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titulo }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'phoneapp/style.css' %}?v=1.1">
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>{{ titulo }}</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="btn">Guardar Registro</button>
+        </form>
+
+        <a class="back-link" href="{% url 'lista_smartphones' %}">volver al catálogo</a>
+    </div>
+
+</body>
+</html>
