@@ -5,7 +5,7 @@ from phoneapp.forms import SmartphoneForm, ManufacturerForm
 
 def lista_smartphones(request):
     smartphones = Smartphone.objects.select_related('manufacturer').all().order_by('manufacturer__name')
-    return render(request, 'phoneapp/lista_smartphones.html', {'smartphones': smartphones})
+    return render(request, 'phoneapp/lista_smartphones.html', {'smartphones': smartphones, 'titulo': 'Catálogo de Smartphones'})
 
 
 def crear_smartphone(request):
